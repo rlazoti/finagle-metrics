@@ -1,10 +1,8 @@
 package com.twitter.finagle.metrics
 
 import com.codahale.metrics.{Gauge => JGauge}
+import com.codahale.metrics.MetricRegistry
 import com.twitter.finagle.stats.{Counter, Gauge, Stat, StatsReceiver}
-import com.codahale.metrics.{MetricRegistry, MetricFilter}
-import java.net.{InetAddress, InetSocketAddress, UnknownHostException}
-import java.util.concurrent.TimeUnit;
 
 object MetricsStatsReceiver {
   val metrics: MetricRegistry = new MetricRegistry
