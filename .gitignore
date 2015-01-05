@@ -22,3 +22,4 @@ out/
 .project
 .cache
 .settings
+.ensime_cache/
