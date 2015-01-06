@@ -9,7 +9,7 @@ Easy way to send Finagle metrics to Codahale Metrics library.
 
 ## Build
 
-```
+```sh
 $ git clone https://github.com/rlazoti/finagle-metrics.git
 $ cd finagle-metrics
 $ sbt package
@@ -19,19 +19,19 @@ $ sbt package
 
 To install it locally, run:
 
-```
+```sh
 $ sbt publish-local
 ```
 
 ### SBT
 
-```
+```scala
 "com.github.rlazoti" %% "finagle-metrics" % "0.0.1-SNAPSHOT"
 ```
 
 or
 
-```
+```scala
 "com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.1-SNAPSHOT"
 ```
 
@@ -51,7 +51,7 @@ You can include your own metrics through the **statsReceiver** field of TwitterS
 
 You can obtain an instance of MetricRegistry class through the field **metrics** of MetricsStatsReceiver.
 
-```
+```scala
 import com.twitter.finagle.metrics.MetricsStatsReceiver
 
 val myCustomMeter = MetricsStatsReceiver.metrics.meter("my-custom-meter")
@@ -64,7 +64,7 @@ Codahale Metrics library has [reporters](https://dropwizard.github.io/metrics/3.
 
 Let's take the GraphiteReporter as example.
 
-```
+```scala
 import com.codahale.metrics.graphite.{Graphite, GraphiteReporter}
 import com.twitter.finagle.metrics.MetricsStatsReceiver
 import java.util.concurrent.TimeUnit;
@@ -78,4 +78,3 @@ val reporter = GraphiteReporter.forRegistry(MetricsStatsReceiver.metrics)
 
 reporter.start(1, TimeUnit.MINUTES)
 ```
-
