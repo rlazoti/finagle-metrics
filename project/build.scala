@@ -9,7 +9,9 @@ object AppBuilder extends Build {
     name          := appName,
     organization  := "com.github.rlazoti",
     version       := "0.0.1-SNAPSHOT",
-    scalaVersion  := "2.11.4"
+    scalaVersion  := "2.11.4",
+    unmanagedSourceDirectories in Compile <<= (scalaSource in Compile)(Seq(_)),
+    unmanagedSourceDirectories in Test    <<= (scalaSource in Test)(Seq(_))
   )
 
   lazy val app = Project(appName, file("."))

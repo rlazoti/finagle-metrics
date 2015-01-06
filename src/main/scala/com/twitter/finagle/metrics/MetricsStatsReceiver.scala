@@ -1,11 +1,28 @@
 package com.twitter.finagle.metrics
 
-import com.codahale.metrics.{Gauge => JGauge}
-import com.codahale.metrics.MetricRegistry
+import com.codahale.metrics.{Gauge => MGauge, MetricRegistry}
 import com.twitter.finagle.stats.{Counter, Gauge, Stat, StatsReceiver}
 
 object MetricsStatsReceiver {
   val metrics: MetricRegistry = new MetricRegistry
+
+  private[metrics] case class MetricCounter(name: String) extends Counter {
+    private val meter = metrics.meter(name)
+    override def incr(delta: Int): Unit = meter.mark(delta)
+  }
+
+  private[metrics] case class MetricGauge(name: String)(f: => Float) extends Gauge {
+    metrics.register(name, new MGauge[Float]() {
+      override def getValue(): Float = f
+    })
+
+    override def remove(): Unit = metrics.remove(name)
+  }
+
+  private[metrics] case class MetricStat(name: String) extends Stat {
+    private val histogram = metrics.histogram(name)
+    override def add(value: Float): Unit = histogram.update(value.toLong)
+  }
 }
 
 class MetricsStatsReceiver extends StatsReceiver {
@@ -24,28 +41,4 @@ class MetricsStatsReceiver extends StatsReceiver {
 
   override def stat(names: String*): Stat =
     MetricStat(format(names))
-}
-
-case class MetricCounter(name: String) extends Counter {
-  import MetricsStatsReceiver._
-
-  private val meter = metrics.meter(name)
-  override def incr(delta: Int): Unit = meter.mark(delta)
-}
-
-case class MetricGauge(name: String)(f: => Float) extends Gauge {
-  import MetricsStatsReceiver._
-
-  metrics.register(name, new JGauge[Float]() {
-    override def getValue(): Float = f
-  })
-
-  override def remove(): Unit = Unit
-}
-
-case class MetricStat(name: String) extends Stat {
-  import MetricsStatsReceiver._
-
-  private val histogram = metrics.histogram(name)
-  override def add(value: Float): Unit = histogram.update(value.toLong)
 }
