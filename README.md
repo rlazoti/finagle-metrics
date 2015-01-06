@@ -7,7 +7,7 @@ Easy way to send Finagle metrics to Codahale Metrics library.
 
 *finagle-metrics* enables your finagle based application to send its metrics to [Codahale Metrics library](https://github.com/dropwizard/metrics) instead of the default metrics ([finagle-stats](https://github.com/twitter/finagle/tree/master/finagle-stats)).
 
-## Build
+### Build
 
 ```sh
 $ git clone https://github.com/rlazoti/finagle-metrics.git
@@ -15,7 +15,13 @@ $ cd finagle-metrics
 $ sbt package
 ```
 
-## Setup
+### Test
+
+```sh
+$ sbt test
+```
+
+### Setup
 
 To install it locally, run:
 
@@ -23,7 +29,7 @@ To install it locally, run:
 $ sbt publish-local
 ```
 
-### SBT
+#### sbt
 
 ```scala
 "com.github.rlazoti" %% "finagle-metrics" % "0.0.1-SNAPSHOT"
@@ -35,19 +41,19 @@ or
 "com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.1-SNAPSHOT"
 ```
 
-## Usage
+### Usage
 
-### Using twitter-server
+#### Using twitter-server
 
 If you're using [twitter-server](https://github.com/twitter/twitter-server) to create your finagle services, everything you need to do is just adding the finagle-metrics jar to your project.
 
 You don't need to add the finagle-stats to your project, but both libraries will work together without any issue if you need it.
 
-### Including your own metrics
+#### Including your own metrics
 
 You can include your own metrics through the **statsReceiver** field of TwitterServer, so your metrics will be sent to Codahale Metrics as well.
 
-### Including your own metrics through Codahale Metrics
+#### Including your own metrics through Codahale Metrics
 
 You can obtain an instance of MetricRegistry class through the field **metrics** of MetricsStatsReceiver.
 
@@ -58,7 +64,7 @@ val myCustomMeter = MetricsStatsReceiver.metrics.meter("my-custom-meter")
 myCustomMeter.mark()
 ```
 
-### REPORTING
+#### Reporting
 
 Codahale Metrics library has [reporters](https://dropwizard.github.io/metrics/3.1.0/getting-started/#other-reporting) for many diferent outputs.
 
