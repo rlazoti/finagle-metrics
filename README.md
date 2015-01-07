@@ -25,20 +25,23 @@ $ sbt test
 
 To install it locally, run:
 
+#### Last Release
+
 ```sh
+$ git checkout tags/version-0.0.1 -b version-0.0.1
 $ sbt publish-local
 ```
 
-#### sbt
+And add the sbt dependency as:
 
 ```scala
-"com.github.rlazoti" %% "finagle-metrics" % "0.0.1-SNAPSHOT"
+"com.github.rlazoti" %% "finagle-metrics" % "0.0.1"
 ```
 
 or
 
 ```scala
-"com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.1-SNAPSHOT"
+"com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.1"
 ```
 
 ### Usage
