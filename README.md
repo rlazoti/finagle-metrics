@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rlazoti/finagle-metrics.svg)](https://travis-ci.org/rlazoti/finagle-metrics)
+
 finagle-metrics
 ===============
 
