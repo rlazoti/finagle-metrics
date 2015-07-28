@@ -25,25 +25,17 @@ $ sbt test
 
 ### Setup
 
-To install it locally, run:
-
-#### Last Release
-
-```sh
-$ git checkout tags/version-0.0.1 -b version-0.0.1
-$ sbt publish-local
-```
-
-And add the sbt dependency as:
+Finagle-metrics is available on [OSS Sonatype](https://oss.sonatype.org).
+So everything you need to do is add the sbt dependency like:
 
 ```scala
-"com.github.rlazoti" %% "finagle-metrics" % "0.0.1"
+"com.github.rlazoti" %% "finagle-metrics" % "0.0.2"
 ```
 
 or
 
 ```scala
-"com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.1"
+"com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.2"
 ```
 
 ### Usage
@@ -88,4 +80,16 @@ val reporter = GraphiteReporter.forRegistry(MetricsStatsReceiver.metrics)
                                .build(graphite)
 
 reporter.start(1, TimeUnit.MINUTES)
+```
+
+And an example using JmxReporter.
+
+```scala
+import com.codahale.metrics.JmxReporter
+import com.twitter.finagle.metrics.MetricsStatsReceiver
+
+val reporter: JmxReporter = JmxReporter.forRegistry(MetricsStatsReceiver.metrics)
+                                       .build()
+
+reporter.start()
 ```
