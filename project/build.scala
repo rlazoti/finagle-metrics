@@ -32,8 +32,10 @@ object AppBuilder extends Build {
         setReleaseVersion,
         commitReleaseVersion,
         tagRelease,
+        ReleaseStep(action = Command.process("publishSigned", _)),
         setNextVersion,
-        commitNextVersion
+        commitNextVersion,
+        ReleaseStep(action = Command.process("sonatypeReleaseAll", _))
       )
     }
   )
