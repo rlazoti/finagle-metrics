@@ -26,7 +26,9 @@ $ sbt test
 ### Setup
 
 Finagle-metrics is available on [OSS Sonatype](https://oss.sonatype.org).
+
 So everything you need to do is add the sbt dependency like:
+
 
 ```scala
 "com.github.rlazoti" %% "finagle-metrics" % "0.0.2"
