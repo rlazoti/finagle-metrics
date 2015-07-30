@@ -21,7 +21,7 @@ object AppBuilder extends Build {
 
   // sbt-release settings
   val appReleaseSettings = releaseSettings ++ Seq(
-    tagName        <<= (version in ThisBuild) map (v => "version-" + v),
+    tagName        <<= (version in ThisBuild) map (v => "v" + v),
     tagComment     <<= (version in ThisBuild) map (v => "[BUILD] Release %s" format v),
     commitMessage  <<= (version in ThisBuild) map (v => "[BUILD] Set version to %s" format v),
     releaseProcess <<= thisProjectRef apply { ref =>

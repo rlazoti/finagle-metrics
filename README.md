@@ -1,4 +1,16 @@
-[![Build Status](https://travis-ci.org/rlazoti/finagle-metrics.svg)](https://travis-ci.org/rlazoti/finagle-metrics)
+[![][travis img]][travis]
+[![][release img]][release]
+[![][license img]][license]
+
+[travis]:https://travis-ci.org/rlazoti/finagle-metrics
+[travis img]:https://travis-ci.org/rlazoti/finagle-metrics.svg?branch=master
+
+[release]:https://github.com/rlazoti/finagle-metrics/releases
+[release img]:https://img.shields.io/github/release/rlazoti/finagle-metrics.svg
+
+[license]:LICENSE
+[license img]:https://img.shields.io/dub/l/vibe-d.svg
+
 
 finagle-metrics
 ===============
