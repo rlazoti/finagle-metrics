@@ -11,8 +11,8 @@ object Dependencies {
   val junit                  = "junit"                 %  "junit"            % "4.11"
 
   val appDependencies        = Seq(
-    finagleCore,
     metricsCore,
+    finagleCore % "provided",
     scalatest % "test",
     junit % "test"
   )
