@@ -2,12 +2,12 @@ import sbt._
 
 object Dependencies {
 
-  val finagleVersion         = "6.24.0"
+  val finagleVersion         = "6.35.0"
   val metricsVersion         = "3.1.0"
 
   val finagleCore            = "com.twitter"           %% "finagle-core"     % finagleVersion
   val metricsCore            = "io.dropwizard.metrics" %  "metrics-core"     % metricsVersion
-  val scalatest              = "org.scalatest"         %% "scalatest"        % "2.2.1"
+  val scalatest              = "org.scalatest"         %% "scalatest"        % "2.2.6"
   val junit                  = "junit"                 %  "junit"            % "4.11"
 
   val appDependencies        = Seq(
