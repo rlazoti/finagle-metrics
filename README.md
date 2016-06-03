@@ -121,6 +121,8 @@ version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.11.8"
 
+resolvers += "twttr" at "https://maven.twttr.com/"
+
 libraryDependencies ++= Seq(
   "com.twitter"        %% "twitter-server"  % "1.20.0",
   "com.github.rlazoti" %% "finagle-metrics" % "0.0.2"
