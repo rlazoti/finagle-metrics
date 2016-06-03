@@ -33,6 +33,17 @@ class MetricsStatsReceiverTest extends FunSuite {
     assert(readGauge("my_gauge") === x)
   }
 
+  test("MetricsStatsReceiver should always assume the latest value of an already created gauge") {
+    val gaugeName = "my_gauge2"
+    val expectedValue = 8.8f
+
+    receiver.addGauge(gaugeName)(2.2f)
+    receiver.addGauge(gaugeName)(9.9f)
+    receiver.addGauge(gaugeName)(expectedValue)
+
+    assert(readGauge(gaugeName) === expectedValue)
+  }
+
   test("MetricsStatsReceiver should store and read stat into the Codahale Metrics library") {
     val x = 1
     val y = 3
