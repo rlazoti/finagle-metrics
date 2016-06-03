@@ -14,12 +14,11 @@ object AppBuilder extends Build {
   val appSettings = Seq(
     name          := appName,
     organization  := "com.github.rlazoti",
-    scalaVersion  := "2.11.4",
+    scalaVersion  := "2.11.8",
     unmanagedSourceDirectories in Compile <<= (scalaSource in Compile)(Seq(_)),
     unmanagedSourceDirectories in Test    <<= (scalaSource in Test)(Seq(_))
   )
 
-  // sbt-release settings
   val appReleaseSettings = releaseSettings ++ Seq(
     tagName        <<= (version in ThisBuild) map (v => "v" + v),
     tagComment     <<= (version in ThisBuild) map (v => "[BUILD] Release %s" format v),

@@ -1,7 +1,8 @@
 package com.twitter.finagle.metrics
 
-import com.codahale.metrics.{Gauge => MGauge, MetricRegistry}
+import com.codahale.metrics.{Gauge => MGauge, Metric, MetricFilter, MetricRegistry}
 import com.twitter.finagle.stats.{Counter, Gauge, Stat, StatsReceiver}
+import scala.collection.JavaConverters._
 
 object MetricsStatsReceiver {
   val metrics: MetricRegistry = new MetricRegistry
@@ -12,6 +13,13 @@ object MetricsStatsReceiver {
   }
 
   private[metrics] case class MetricGauge(name: String)(f: => Float) extends Gauge {
+    // remove old gauge's value before adding a new one
+    metrics.getGauges(new MetricFilter() {
+      override def matches(metricName: String, metric: Metric): Boolean =
+        metricName == name
+    }).asScala
+      .foreach(entry => metrics.remove(entry._1))
+
     metrics.register(name, new MGauge[Float]() {
       override def getValue(): Float = f
     })
