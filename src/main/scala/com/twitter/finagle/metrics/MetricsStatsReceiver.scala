@@ -1,6 +1,6 @@
 package com.twitter.finagle.metrics
 
-import com.codahale.metrics.{ Gauge => MGauge, Metric, MetricFilter, MetricRegistry }
+import com.codahale.metrics.{Gauge => MGauge, Metric, MetricFilter, MetricRegistry}
 import com.twitter.finagle.stats.{Counter, Gauge, Stat, StatsReceiver}
 import scala.collection.JavaConverters._
 
