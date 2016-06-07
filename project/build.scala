@@ -1,6 +1,7 @@
 import sbt._
 import sbt.Keys._
 import Dependencies._
+import scoverage.ScoverageKeys._
 import sbtrelease._
 import sbtrelease.ReleaseStep
 import sbtrelease.ReleasePlugin._
@@ -15,6 +16,7 @@ object AppBuilder extends Build {
     name          := appName,
     organization  := "com.github.rlazoti",
     scalaVersion  := "2.11.8",
+    coverageEnabled := true,
     unmanagedSourceDirectories in Compile <<= (scalaSource in Compile)(Seq(_)),
     unmanagedSourceDirectories in Test    <<= (scalaSource in Test)(Seq(_))
   )

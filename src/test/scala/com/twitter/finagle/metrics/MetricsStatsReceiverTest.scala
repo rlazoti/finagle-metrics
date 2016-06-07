@@ -10,9 +10,10 @@ class MetricsStatsReceiverTest extends FunSuite {
 
   private[this] val receiver = new MetricsStatsReceiver()
 
-  private[this] def readGauge(name: String): Number = {
+  private[this] def readGauge(name: String): Option[Number] = {
     val gauge = metrics.getGauges.get(name)
-    if (gauge != null) gauge.getValue.asInstanceOf[Float] else null
+    if (gauge != null) Some(gauge.getValue.asInstanceOf[Float])
+    else None
   }
 
   private[this] def readCounter(name: String): Number = {
@@ -30,7 +31,7 @@ class MetricsStatsReceiverTest extends FunSuite {
     val x = 1.5f
     receiver.addGauge("my_gauge")(x)
 
-    assert(readGauge("my_gauge") === x)
+    assert(readGauge("my_gauge") === Some(x))
   }
 
   test("MetricsStatsReceiver should always assume the latest value of an already created gauge") {
@@ -41,7 +42,19 @@ class MetricsStatsReceiverTest extends FunSuite {
     receiver.addGauge(gaugeName)(9.9f)
     receiver.addGauge(gaugeName)(expectedValue)
 
-    assert(readGauge(gaugeName) === expectedValue)
+    assert(readGauge(gaugeName) === Some(expectedValue))
+  }
+
+  test("MetricsStatsReceiver should store and remove gauge into the Codahale Metrics Library") {
+    val gaugeName = "temp-gauge"
+    val expectedValue = 2.8f
+
+    val tempGauge = receiver.addGauge(gaugeName)(expectedValue)
+    assert(readGauge(gaugeName) === Some(expectedValue))
+
+    tempGauge.remove()
+
+    assert(readGauge(gaugeName) === None)
   }
 
   test("MetricsStatsReceiver should store and read stat into the Codahale Metrics library") {
