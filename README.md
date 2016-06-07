@@ -1,5 +1,6 @@
 [![][travis img]][travis]
 [![][release img]][release]
+[![][coverage img]][coverage]
 [![][license img]][license]
 
 [travis]:https://travis-ci.org/rlazoti/finagle-metrics
@@ -7,6 +8,9 @@
 
 [release]:https://github.com/rlazoti/finagle-metrics/releases
 [release img]:https://img.shields.io/github/release/rlazoti/finagle-metrics.svg
+
+[coverage]:https://coveralls.io/github/rlazoti/finagle-metrics?branch=master
+[coverage img]:https://coveralls.io/repos/github/rlazoti/finagle-metrics/badge.svg?branch=master
 
 [license]:LICENSE
 [license img]:https://img.shields.io/dub/l/vibe-d.svg
