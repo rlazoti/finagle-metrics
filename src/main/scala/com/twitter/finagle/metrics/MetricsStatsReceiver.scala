@@ -18,7 +18,7 @@ object MetricsStatsReceiver {
       override def matches(metricName: String, metric: Metric): Boolean =
         metricName == name
     }).asScala
-      .foreach(entry => metrics.remove(entry._1))
+      .foreach { case (gaugeName, _) => metrics.remove(gaugeName) }
 
     metrics.register(name, new MGauge[Float]() {
       override def getValue(): Float = f
@@ -34,19 +34,17 @@ object MetricsStatsReceiver {
 }
 
 class MetricsStatsReceiver extends StatsReceiver {
-  import MetricsStatsReceiver._
-
   override val repr: AnyRef = this
 
   private[this] def format(names: Seq[String]) =
     names.mkString(".")
 
   override def counter(names: String*): Counter =
-    MetricCounter(format(names))
+    MetricsStatsReceiver.MetricCounter(format(names))
 
   override def addGauge(names: String*)(f: => Float): Gauge =
-    MetricGauge(format(names)) (f)
+    MetricsStatsReceiver.MetricGauge(format(names)) (f)
 
   override def stat(names: String*): Stat =
-    MetricStat(format(names))
+    MetricsStatsReceiver.MetricStat(format(names))
 }

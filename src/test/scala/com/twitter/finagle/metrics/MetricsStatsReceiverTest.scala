@@ -1,31 +1,32 @@
 package com.twitter.finagle.metrics
 
+import com.twitter.finagle.metrics.MetricsStatsReceiver._
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.FunSuite
 
 @RunWith(classOf[JUnitRunner])
 class MetricsStatsReceiverTest extends FunSuite {
-  import com.twitter.finagle.metrics.MetricsStatsReceiver._
 
   private[this] val receiver = new MetricsStatsReceiver()
 
-  private[this] def readGauge(name: String): Option[Number] = {
-    val gauge = metrics.getGauges.get(name)
-    if (gauge != null) Some(gauge.getValue.asInstanceOf[Float])
-    else None
-  }
+  private[this] def readGauge(name: String): Option[Number] =
+    Option(metrics.getGauges.get(name)) match {
+      case Some(gauge) => Some(gauge.getValue.asInstanceOf[Float])
+      case _ => None
+    }
 
-  private[this] def readCounter(name: String): Number = {
-    val counter = metrics.getMeters.get(name)
-    if (counter != null) counter.getCount else null
-  }
+  private[this] def readCounter(name: String): Option[Number] =
+    Option(metrics.getMeters.get(name)) match {
+      case Some(counter) => Some(counter.getCount)
+      case _ => None
+    }
 
-  private[this] def readStat(name: String): Number = {
-    val stat = metrics.getHistograms.get(name)
-    if (stat != null) stat.getSnapshot.getValues.toSeq.sum
-    else null
-  }
+  private[this] def readStat(name: String): Option[Number] =
+    Option(metrics.getHistograms.get(name)) match {
+      case Some(stat) => Some(stat.getSnapshot.getValues.toSeq.sum)
+      case _ => None
+    }
 
   test("MetricsStatsReceiver should store and read gauge into the Codahale Metrics library") {
     val x = 1.5f
@@ -67,7 +68,7 @@ class MetricsStatsReceiverTest extends FunSuite {
     s.add(y)
     s.add(z)
 
-    assert(readStat("my_stat") === x + y + z)
+    assert(readStat("my_stat") === Some(x + y + z))
   }
 
   test("MetricsStatsReceiver should store and read counter into the Codahale Metrics library") {
@@ -80,7 +81,7 @@ class MetricsStatsReceiverTest extends FunSuite {
     c.incr(y)
     c.incr(z)
 
-    assert(readCounter("my_counter") === x + y + z)
+    assert(readCounter("my_counter") === Some(x + y + z))
   }
 
 }
