@@ -13,12 +13,12 @@ object AppBuilder extends Build {
   val appName = "finagle-metrics"
 
   val appSettings = Seq(
-    name          := appName,
-    organization  := "com.github.rlazoti",
-    scalaVersion  := "2.11.8",
+    name            := appName,
+    organization    := "com.github.rlazoti",
+    scalaVersion    := "2.11.8",
     coverageEnabled := true,
-    unmanagedSourceDirectories in Compile <<= (scalaSource in Compile)(Seq(_)),
-    unmanagedSourceDirectories in Test    <<= (scalaSource in Test)(Seq(_))
+    scalacOptions   := Seq("-deprecation", "-feature", "-unchecked", "-language:postfixOps", "-target:jvm-1.8"),
+    javacOptions in compile ++= Seq("-target", "8", "-source", "8")
   )
 
   val appReleaseSettings = releaseSettings ++ Seq(
