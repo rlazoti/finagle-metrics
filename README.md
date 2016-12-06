@@ -51,13 +51,13 @@ So everything you need to do is add the sbt dependency like:
 
 
 ```scala
-"com.github.rlazoti" %% "finagle-metrics" % "0.0.3"
+"com.github.rlazoti" %% "finagle-metrics" % "0.0.4"
 ```
 
 or
 
 ```scala
-"com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.3"
+"com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.4"
 ```
 
 ### Usage
