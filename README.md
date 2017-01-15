@@ -1,6 +1,5 @@
 [![][travis img]][travis]
 [![][release img]][release]
-[![][coverage img]][coverage]
 [![][quality img]][quality]
 [![][license img]][license]
 
@@ -9,9 +8,6 @@
 
 [release]:https://github.com/rlazoti/finagle-metrics/releases
 [release img]:https://img.shields.io/github/release/rlazoti/finagle-metrics.svg
-
-[coverage]:https://coveralls.io/github/rlazoti/finagle-metrics?branch=master
-[coverage img]:https://coveralls.io/repos/github/rlazoti/finagle-metrics/badge.svg?branch=master
 
 [quality]:https://www.codacy.com/app/rodrigolazoti/finagle-metrics
 [quality img]:https://api.codacy.com/project/badge/Grade/812e2e73d83b4944aee308a58eb84ded

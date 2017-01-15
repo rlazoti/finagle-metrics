@@ -1,7 +1,6 @@
 import sbt._
 import sbt.Keys._
 import Dependencies._
-import scoverage.ScoverageKeys._
 import sbtrelease._
 import sbtrelease.ReleaseStep
 import sbtrelease.ReleasePlugin._
@@ -16,7 +15,6 @@ object AppBuilder extends Build {
     name            := appName,
     organization    := "com.github.rlazoti",
     scalaVersion    := "2.11.8",
-    coverageEnabled := true,
     scalacOptions   := Seq("-deprecation", "-feature", "-unchecked", "-language:postfixOps", "-target:jvm-1.8"),
     javacOptions in compile ++= Seq("-target", "8", "-source", "8")
   )
