@@ -47,14 +47,18 @@ So everything you need to do is add the sbt dependency like:
 
 
 ```scala
-"com.github.rlazoti" %% "finagle-metrics" % "0.0.6"
+"com.github.rlazoti" %% "finagle-metrics" % "0.0.8"
 ```
 
 or
 
 ```scala
-"com.github.rlazoti" % "finagle-metrics_2.11" % "0.0.6"
+"com.github.rlazoti" % "finagle-metrics_2.12" % "0.0.8"
 ```
+
+
+Note that finagle-metrics is cross-published for both 2.11 and 2.12 so you can use 2.11 scala version as well.
+
 
 ### Usage
 
@@ -123,13 +127,13 @@ name := "finagle-metrics-example"
 
 version := "0.0.1-SNAPSHOT"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.1"
 
 resolvers += "twttr" at "https://maven.twttr.com/"
 
 libraryDependencies ++= Seq(
   "com.twitter"        %% "twitter-server"  % "1.26.0",
-  "com.github.rlazoti" %% "finagle-metrics" % "0.0.6"
+  "com.github.rlazoti" %% "finagle-metrics" % "0.0.8"
 )
 ```
 
