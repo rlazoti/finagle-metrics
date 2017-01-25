@@ -1,1 +1,1 @@
-sbt clean "release with-defaults"
+sbt clean "release cross with-defaults"
