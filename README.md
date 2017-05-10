@@ -47,13 +47,13 @@ So everything you need to do is add the sbt dependency like:
 
 
 ```scala
-"com.github.rlazoti" %% "finagle-metrics" % "0.0.8"
+"com.github.rlazoti" %% "finagle-metrics" % "0.0.9"
 ```
 
 or
 
 ```scala
-"com.github.rlazoti" % "finagle-metrics_2.12" % "0.0.8"
+"com.github.rlazoti" % "finagle-metrics_2.12" % "0.0.9"
 ```
 
 
@@ -90,7 +90,7 @@ Codahale Metrics library has [reporters](https://dropwizard.github.io/metrics/3.
 Let's take the GraphiteReporter as example.
 
 ```scala
-import com.codahale.metrics.graphite.{Graphite, GraphiteReporter}
+import com.codahale.metrics.graphite.{ Graphite, GraphiteReporter }
 import com.twitter.finagle.metrics.MetricsStatsReceiver
 import java.util.concurrent.TimeUnit
 
@@ -132,8 +132,8 @@ scalaVersion := "2.12.1"
 resolvers += "twttr" at "https://maven.twttr.com/"
 
 libraryDependencies ++= Seq(
-  "com.twitter"        %% "twitter-server"  % "1.26.0",
-  "com.github.rlazoti" %% "finagle-metrics" % "0.0.8"
+  "com.twitter"        %% "twitter-server"  % "1.29.0",
+  "com.github.rlazoti" %% "finagle-metrics" % "0.0.9"
 )
 ```
 
@@ -141,12 +141,12 @@ Then the App.scala:
 
 ```scala
 import com.codahale.metrics.ConsoleReporter
-import com.twitter.finagle.{Http, Service}
+import com.twitter.finagle.{ Http, Service }
 import com.twitter.finagle.metrics.MetricsStatsReceiver
-import com.twitter.finagle.http.{Request, Response, Status}
+import com.twitter.finagle.http.{ Request, Response, Status }
 import com.twitter.io.Charsets
 import com.twitter.server.TwitterServer
-import com.twitter.util.{Await, Future}
+import com.twitter.util.{ Await, Future }
 import java.util.concurrent.TimeUnit
 
 object App extends TwitterServer {
