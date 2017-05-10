@@ -118,7 +118,7 @@ reporter.start()
 
 #### Full Example
 
-Let's create a full example that reports its metrics to console each five seconds.
+Let's create a full example that reports its metrics to console each five seconds (or take a look at the ```example``` folder).
 
 Firstly, let's create the build.sbt:
 
