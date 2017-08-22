@@ -1,7 +1,7 @@
 package com.twitter.finagle.metrics
 
 import com.codahale.metrics.{Gauge => MGauge, Metric, MetricFilter, MetricRegistry}
-import com.twitter.finagle.stats.{Counter, Gauge, Stat, StatsReceiver}
+import com.twitter.finagle.stats.{Counter, Gauge, Verbosity, Stat, StatsReceiver}
 import scala.collection.JavaConverters._
 
 object MetricsStatsReceiver {
@@ -9,7 +9,7 @@ object MetricsStatsReceiver {
 
   private[metrics] case class MetricCounter(name: String) extends Counter {
     private val meter = metrics.meter(name)
-    override def incr(delta: Int): Unit = meter.mark(delta)
+    override def incr(delta: Long): Unit = meter.mark(delta)
   }
 
   private[metrics] case class MetricGauge(name: String)(f: => Float) extends Gauge {
@@ -44,12 +44,12 @@ class MetricsStatsReceiver extends StatsReceiver {
   private[this] def format(names: Seq[String]) =
     names.mkString(".")
 
-  override def counter(names: String*): Counter =
+  override def counter(verbosity: Verbosity, names: String*): Counter =
     MetricsStatsReceiver.MetricCounter(format(names))
 
-  override def addGauge(names: String*)(f: => Float): Gauge =
+  override def addGauge(verbosity: Verbosity, names: String*)(f: => Float): Gauge =
     MetricsStatsReceiver.MetricGauge(format(names)) (f)
 
-  override def stat(names: String*): Stat =
+  override def stat(verbosity: Verbosity, names: String*): Stat =
     MetricsStatsReceiver.MetricStat(format(names))
 }

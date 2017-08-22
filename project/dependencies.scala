@@ -2,8 +2,8 @@ import sbt._
 
 object Dependencies {
 
-  val finagleVersion = "6.41.0"
-  val metricsVersion = "3.1.2"
+  val finagleVersion = "7.0.0"
+  val metricsVersion = "3.2.3"
 
   val finagleCore = "com.twitter"           %% "finagle-core"     % finagleVersion
   val metricsCore = "io.dropwizard.metrics" %  "metrics-core"     % metricsVersion
