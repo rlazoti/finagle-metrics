@@ -16,7 +16,7 @@ object MetricsStatsReceiver {
     // we need to synchronize so this is safe with multiple threads. Ideally the callers are themselves
     // synchronized so they don't overwrite each others gauges but until they are we should protect
     // ourselves from that race condition.
-    synchronized {
+    metrics.synchronized {
       // remove old gauge's value before adding a new one
       metrics.getGauges(new MetricFilter() {
         override def matches(metricName: String, metric: Metric): Boolean =
