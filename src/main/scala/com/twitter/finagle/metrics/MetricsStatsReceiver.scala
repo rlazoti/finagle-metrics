@@ -1,7 +1,8 @@
 package com.twitter.finagle.metrics
 
-import com.codahale.metrics.{Gauge => MGauge, Metric, MetricFilter, MetricRegistry}
-import com.twitter.finagle.stats.{Counter, Gauge, Verbosity, Stat, StatsReceiver}
+import com.codahale.metrics.{Metric, MetricFilter, MetricRegistry, Gauge => MGauge}
+import com.twitter.finagle.stats.{Counter, CounterSchema, Gauge, GaugeSchema, HistogramSchema, Stat, StatsReceiver, Verbosity}
+
 import scala.collection.JavaConverters._
 
 object MetricsStatsReceiver {
@@ -52,4 +53,13 @@ class MetricsStatsReceiver extends StatsReceiver {
 
   override def stat(verbosity: Verbosity, names: String*): Stat =
     MetricsStatsReceiver.MetricStat(format(names))
+
+  override def counter(schema: CounterSchema): Counter =
+    MetricsStatsReceiver.MetricCounter(format(schema.metricBuilder.name))
+
+  override def stat(schema: HistogramSchema): Stat =
+    MetricsStatsReceiver.MetricStat(format(schema.metricBuilder.name))
+
+  override def addGauge(schema: GaugeSchema)(f: => Float): Gauge =
+    MetricsStatsReceiver.MetricGauge(format(schema.metricBuilder.name))(f)
 }
