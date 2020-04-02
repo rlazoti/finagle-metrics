@@ -47,13 +47,13 @@ So everything you need to do is add the sbt dependency like:
 
 
 ```scala
-"com.github.rlazoti" %% "finagle-metrics" % "0.0.12"
+"com.github.rlazoti" %% "finagle-metrics" % "0.0.13"
 ```
 
 or
 
 ```scala
-"com.github.rlazoti" % "finagle-metrics_2.12" % "0.0.12"
+"com.github.rlazoti" % "finagle-metrics_2.12" % "0.0.13"
 ```
 
 
@@ -130,10 +130,11 @@ version := "0.0.1-SNAPSHOT"
 scalaVersion := "2.12.1"
 
 resolvers += "twttr" at "https://maven.twttr.com/"
+resolvers += Resolver.sonatypeRepo("public")
 
 libraryDependencies ++= Seq(
-  "com.twitter"        %% "twitter-server"  % "1.31.0",
-  "com.github.rlazoti" %% "finagle-metrics" % "0.0.12"
+  "com.twitter"        %% "twitter-server"  % "20.3.0",
+  "com.github.rlazoti" %% "finagle-metrics" % "0.0.13"
 )
 ```
 
