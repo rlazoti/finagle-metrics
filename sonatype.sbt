@@ -17,7 +17,7 @@ pomExtra in Global := {
     <developer>
       <id>rlazoti</id>
       <name>Rodrigo Lazoti</name>
-      <url>http://rodrigolazoti.com.br</url>
+      <url>https://rlazoti.github.io</url>
     </developer>
   </developers>
 }

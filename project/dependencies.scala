@@ -18,7 +18,7 @@ object Dependencies {
   )
 
   val appDependencyResolvers = Seq(
-    "twttr" at "http://maven.twttr.com/"
+    "twttr" at "https://maven.twttr.com/"
   )
 
 }
