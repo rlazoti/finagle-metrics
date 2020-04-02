@@ -11,6 +11,8 @@ crossScalaVersions        := Seq("2.11.8", "2.12.1")
 releaseTagName            := s"v${(version in ThisBuild).value}"
 releaseTagComment         := s"[BUILD] Release ${(version in ThisBuild).value}"
 releaseCommitMessage      := s"[BUILD] Set version to ${(version in ThisBuild).value}"
+releaseCrossBuild         := true
+publishTo                 := sonatypePublishToBundle.value
 
 scalacOptions := Seq(
   "-deprecation",
@@ -26,14 +28,16 @@ javacOptions in compile ++= Seq(
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
+  runClean,
   runTest,
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  ReleaseStep(action = Command.process("publishSigned", _), enableCrossBuild = true),
+  releaseStepCommandAndRemaining("+publishSigned"),
+  releaseStepCommand("sonatypeBundleRelease"),
   setNextVersion,
-  commitNextVersion,
-  ReleaseStep(action = Command.process("sonatypeReleaseAll", _), enableCrossBuild = true))
+  commitNextVersion
+)
 
 resolvers           ++= appDependencyResolvers
 libraryDependencies ++= appDependencies
